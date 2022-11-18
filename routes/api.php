@@ -15,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post("listings/",[ApiController::class,'store']);
-Route::get('listings/',[ApiController::class,'index']);
-Route::get('listings/{id}',[ApiController::class,'show']);
+Route::middleware(['cors'])->group(function(){
+
+    Route::post("listings/",[ApiController::class,'store']);
+    Route::get('listings/',[ApiController::class,'index']);
+    Route::get('listings/{id}',[ApiController::class,'show']);
+});
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
